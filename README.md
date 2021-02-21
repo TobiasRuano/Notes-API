@@ -37,7 +37,7 @@ Feel free to contribute at any point in time. But before doing so, open an issue
 
 ## License 📄
 
-This project is under the MIT License - See [LICENSE.md](LICENSE.md) for details.
+This project is under the MIT License - See [LICENSE.md](LICENSE) for details.
 
 ---
 Made with ❤️ by [tobiasruano](https://github.com/tobiasruano) 😊

@@ -6,7 +6,7 @@ _This the API part of the project for my iOS Notes App._
 
 _To get a working copy of this API, you should:_
 * Clone this repo.
-* Type ` npm install ` to download and install all the node modules.
+* Run the command ` npm install ` to download and install all the node modules.
 * Modify the .env file with your MongoDB credentials and your database name.
 * Run it! Type ` npm start `to start the project.
 
@@ -14,7 +14,7 @@ See **Deployment** to know how to deploy the project.
 
 ## Deployment 📦
 
-_The project should work fine as is, but if you need to test the companion app it would be a better option to hav it running all the time. To do so, you should:_
+_The project should work fine as is, but if you need to test the companion app it would be a better option to have it running all the time. To do so, you should:_
 * Create an account on heroku.
 * Create a new project on heroku.
 * Navigate to "Deploy" and select GitHub.

@@ -1,6 +1,3 @@
-# 
- The API for my notes app
-
 # Notes App API
 
 _This the API part of the project for my iOS Notes App._

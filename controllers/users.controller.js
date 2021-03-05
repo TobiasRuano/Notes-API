@@ -21,7 +21,7 @@ exports.createUser = async function (req, res, next) {
             cuerpo: "Thanks for being with us!"
         }
         MailController.sendEmail(data)
-        return res.status(201).json({createdUser, message: "Succesfully Created User"})
+        return res.status(200).json({createdUser, message: "Succesfully Created User"})
     } catch (e) {
         console.log(e)
         return res.status(400).json({status: 400, message: "User Creation was Unsuccesfull"})
@@ -77,7 +77,7 @@ exports.loginUser = async function (req, res, next) {
     try {
         // Calling the Service function with the new object from the Request Body
         var loginUser = await UserService.loginUser(User);
-        return res.status(201).json({loginUser, message: "Succesfully login"})
+        return res.status(200).json({loginUser, message: "Succesfully login"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: "Invalid username or password"})

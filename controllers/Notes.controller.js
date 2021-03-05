@@ -11,7 +11,7 @@ exports.createNote = async function (req, res, next) {
     }
     try {
         var createdNote = await NoteService.createNote(Note)
-        return res.status(201).json({createdNote, message: "Succesfully Created a new Note"})
+        return res.status(200).json({createdNote, message: "Succesfully Created a new Note"})
     } catch (e) {
         console.log(e)
         return res.status(400).json({status: 400, message: "Note Creation was Unsuccesfull"})

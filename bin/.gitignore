@@ -1,7 +1,0 @@
-#ignore node modules
-
-node_modules/*
-
-
-# ignore Local ENV File
-# .env  

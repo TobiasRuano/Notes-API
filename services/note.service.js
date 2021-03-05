@@ -23,7 +23,7 @@ exports.createNote = async function (note) {
     }
 }
 
-exports.selectValidId = function (body) {
+exports.selectValidId = async function (body) {
     var isAvailable = false
     var availableID = ""
 

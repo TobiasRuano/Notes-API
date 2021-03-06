@@ -14,14 +14,14 @@ exports.createUser = async function (req, res, next) {
         password: req.body.password,
     }
     try {
-        var createdUser = await UserService.createUser(User)
+        var token = await UserService.createUser(User)
         let data = {
             destinatario: User.email,
             asunto: "Account succesfully created!",
             cuerpo: "Thanks for being with us!"
         }
         MailController.sendEmail(data)
-        return res.status(200).json({createdUser, message: "Succesfully Created User"})
+        return res.status(200).json({token: token, message: "Succesfully Created User"})
     } catch (e) {
         console.log(e)
         return res.status(400).json({status: 400, message: "User Creation was Unsuccesfull"})

@@ -1,10 +1,6 @@
 const models = require('../models');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const moment = require('moment');
-const sequelize = require('../models/index.js');
-const fs = require('fs');
-var path = require('path');
 
 function signUp(req, res){
     models.User.findOne({where:{mail:req.body.mail}}).then(result => {
@@ -89,12 +85,13 @@ function updateUser(req, res) {
             models.User.findOne({where:{mail:req.body.mail}}).then(result2 => {
                 if(result2) {
                     res.status(403).json({
-                        message: "Another user already uses that email.",
+                        message: "Email already in use.",
                     });
                 } else {
                     const user = {
                         mail:req.body.mail,
-                        address: req.body.address
+                        name:req.body.name,
+                        surname:req.body.surname
                     }
                     models.User.update(user, {where: {id: result.id}}).then(result => {
                         res.status(201).json({
@@ -114,12 +111,6 @@ function updateUser(req, res) {
         }
     });
 }
-
-function getCurrentDateTime() {
-    var localTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    return localTime;
-}
-
 
 module.exports = {
     signUp: signUp,

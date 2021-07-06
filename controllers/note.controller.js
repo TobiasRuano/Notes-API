@@ -9,7 +9,7 @@ function createNote(req, res){
     const note = {
         title: req.body.title,
         content: req.body.content,
-        userID:req.userData
+        userId:req.userData.userId
     }
     models.Note.create(note).then(result => {
         res.status(201).json({
@@ -25,14 +25,15 @@ function createNote(req, res){
 }
 
 function getNotes(req, res) {
-    models.Note.findAll({where:{userId:req.userData}}).then(result => {
+    console.log(req.userData.userId)
+    models.Note.findAll({where:{userId:req.userData.userId}}).then(result => {
         if(result) {
             res.status(201).json({
                 data: result
             });
         } else {
             res.status(404).json({
-                message: "No notes for user: " + req.userData
+                message: "No notes for user: " + req.userData.userId
             });
         }
     }).catch(error => {

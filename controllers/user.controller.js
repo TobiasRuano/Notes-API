@@ -13,33 +13,27 @@ function signUp(req, res){
                 message: "Email already exists!"
             });
         } else {
-            if (result.password == null) {
-                bcryptjs.genSalt(10, function(err, salt){
-                    bcryptjs.hash(req.body.password, salt, function(err, hash){
-                        const user = {
-                            name: req.body.name,
-                            surname: req.body.surname,
-                            mail:req.body.mail,
-                            password: hash
-                        }
-                        models.User.create(user).then(result => {
-                            res.status(201).json({
-                                message: "User created successfully",
-                                data: result
-                            });
-                        }).catch(error => {
-                            res.status(500).json({
-                                message: "Something went wrong!",
-                                error: error
-                            });
+            bcryptjs.genSalt(10, function(err, salt){
+                bcryptjs.hash(req.body.password, salt, function(err, hash){
+                    const user = {
+                        name: req.body.name,
+                        surname: req.body.surname,
+                        mail:req.body.mail,
+                        password: hash
+                    }
+                    models.User.create(user).then(result => {
+                        res.status(201).json({
+                            message: "User created successfully",
+                            User: result
+                        });
+                    }).catch(error => {
+                        res.status(500).json({
+                            message: "Something went wrong!",
+                            error: error
                         });
                     });
                 });
-            } else {
-                res.status(409).json({
-                    message: "The user already has a password"
-                });
-            }
+            });
         }
     }).catch(error => {
         res.status(500).json({
@@ -64,8 +58,10 @@ function login(req, res){
                     }, process.env.JWT_KEY, function(err, token){
                         res.status(200).json({
                             message: "Authentication successful!",
-                            token: token,
-                            data: user
+                            data: {
+                                token: token,
+                                User: user
+                            }
                         });
                     });
                 } else {

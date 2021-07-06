@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({
     extended: false
 }));
+app.enable('trust proxy')
 
 app.use("/user", userRoute);
 app.use("/login", loginRoute);

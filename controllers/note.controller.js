@@ -11,21 +11,24 @@ function createNote(req, res){
         content: req.body.content,
         userId:req.userData.userId
     }
-    models.Note.create(note).then(result => {
-        res.status(201).json({
-            message: "Note created successfully",
-            Note: result
+    if(req.body.id != null) {
+        updateNote(req, res);
+    } else {
+        models.Note.create(note).then(result => {
+            res.status(201).json({
+                message: "Note created successfully",
+                Note: result
+            });
+        }).catch(error => {
+            res.status(500).json({
+                message: "Something went wrong!",
+                error: error
+            });
         });
-    }).catch(error => {
-        res.status(500).json({
-            message: "Something went wrong!",
-            error: error
-        });
-    });
+    }
 }
 
 function getNotes(req, res) {
-    console.log(req.userData.userId)
     models.Note.findAll({where:{userId:req.userData.userId}}).then(result => {
         if(result) {
             res.status(201).json({
@@ -53,7 +56,7 @@ function updateNote(req, res) {
             }
             models.Note.update(note, {where: {id: result.id}}).then(result2 => {
                 res.status(200).json({
-                    data: result2
+                    Note: result2
                 });
             }).catch(error => {
                 res.status(304).json({
@@ -78,6 +81,7 @@ function deleteNote(req, res) {
     models.Note.findOne({where:{id:req.body.id}}).then(result => {
         if(result) {
             models.Note.destroy({where: {id: result.id}}).then(result2 => {
+                console.log("Yesssss")
                 res.status(200).json({
                     message: "Note deleted!"
                 });
@@ -103,6 +107,5 @@ function deleteNote(req, res) {
 module.exports = {
     createNote: createNote,
     getNotes: getNotes,
-    deleteNote: deleteNote,
-    updateNote: updateNote
+    deleteNote: deleteNote
 } 

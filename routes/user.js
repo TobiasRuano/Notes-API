@@ -11,6 +11,5 @@ router.patch('/update', checkAuth.checkAuth, userController.updateUser);
 router.post('/getnotes', checkAuth.checkAuth, noteController.getNotes);
 router.post('/', checkAuth.checkAuth, noteController.createNote);
 router.delete('/', checkAuth.checkAuth, noteController.deleteNote);
-router.post('/updatenote', checkAuth.checkAuth, noteController.updateNote);
 
 module.exports = router;

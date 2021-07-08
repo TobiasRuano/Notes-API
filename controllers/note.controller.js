@@ -55,8 +55,16 @@ function updateNote(req, res) {
                 content: req.body.content
             }
             models.Note.update(note, {where: {id: result.id}}).then(result2 => {
-                res.status(200).json({
-                    Note: result2
+                models.Note.findOne({where:{id:req.body.id}}).then(result3 => {
+                    console.log(result3)
+                    res.status(200).json({
+                        Note: result3
+                    });
+                }).catch( error => {
+                    res.status(304).json({
+                        message: "Unable to update Note",
+                        error: error
+                    });
                 });
             }).catch(error => {
                 res.status(304).json({
